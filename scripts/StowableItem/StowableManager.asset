@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: StowableManager
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: aa95a3a0b3fcd8a40a82ca5f3689234e,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 469717aaf2e2b57499d22265d80f6673,
     type: 2}
   udonAssembly: 
   assemblyError: 
-  sourceCsScript: {fileID: 11500000, guid: 9f75f0d66bee03b4c94aaeea9ce25847, type: 3}
+  sourceCsScript: {fileID: 11500000, guid: b5671776e5f06c94ca218d30cc8a503d, type: 3}
   scriptVersion: 2
   compiledVersion: 2
   behaviourSyncMode: 4

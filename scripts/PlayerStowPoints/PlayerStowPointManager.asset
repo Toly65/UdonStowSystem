@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: PlayerStowPointManager
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 85a3fe35576f2d540a3ed6805c545b89,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 9d63f3563cf5aac419ac82044e133529,
     type: 2}
   udonAssembly: 
   assemblyError: 
-  sourceCsScript: {fileID: 11500000, guid: 29503ff1e563b6a4bb7a866d3487f230, type: 3}
+  sourceCsScript: {fileID: 11500000, guid: 7ded081cca9e1734fbdacd4caf6684a8, type: 3}
   scriptVersion: 2
   compiledVersion: 2
   behaviourSyncMode: 1

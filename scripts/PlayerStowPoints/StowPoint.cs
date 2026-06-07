@@ -13,9 +13,6 @@ public class StowPoint : UdonSharpBehaviour
     [SerializeField] private Renderer targetRenderer;
     [SerializeField] private Material DefaultMaterial;
     [SerializeField] private Material ActiveMaterial;
-
-    [Header("this may be managed by a stow Manager instead")]
-    [SerializeField] private bool onlyRecieveItemsWithStowSettings;
     //[SerializeField] private Material DuplicationMaterial;
     private bool itemlocked;
     private bool receptive;
@@ -90,11 +87,6 @@ public class StowPoint : UdonSharpBehaviour
 
             int pickupSizeClass = 0;
             bool hasStowMetadata = TryGetPickupSizeClass(recievabePickup, ref pickupSizeClass);
-            if (onlyRecieveItemsWithStowSettings && !hasStowMetadata)
-            {
-                recievabePickup = null;
-                return;
-            }
             if (hasStowMetadata)
             {
                 //check the size
@@ -157,10 +149,6 @@ public class StowPoint : UdonSharpBehaviour
 
         int pickupSizeClass = 0;
         bool hasStowMetadata = TryGetPickupSizeClass(pickup, ref pickupSizeClass);
-        if (onlyRecieveItemsWithStowSettings && !hasStowMetadata)
-        {
-            return;
-        }
         if (hasStowMetadata)
         {
             
@@ -321,19 +309,7 @@ public class StowPoint : UdonSharpBehaviour
             return true;
         }
 
-        if (pickup.transform.childCount <= 0)
-        {
-            return false;
-        }
-
-        StowSettings settings = pickup.transform.GetChild(0).GetComponent<StowSettings>();
-        if (settings == null)
-        {
-            return false;
-        }
-
-        outSizeClass = settings.GetSizeClass();
-        return true;
+        return false;
     }
 
     private bool TryGetStowableManager(VRC_Pickup pickup, ref StowableManager outManager)

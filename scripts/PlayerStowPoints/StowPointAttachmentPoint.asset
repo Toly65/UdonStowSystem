@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: StowPointAttachmentPoint
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: f3a5ee9f78c2f114780cbe1c2d46c803,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 59ec8bb38b7aff646878ee91b796c798,
     type: 2}
   udonAssembly: 
   assemblyError: 
-  sourceCsScript: {fileID: 11500000, guid: efc5795287fb7f340a9a97bd21f340e9, type: 3}
+  sourceCsScript: {fileID: 11500000, guid: 9d163db381f0fde458f19ca50588d241, type: 3}
   scriptVersion: 2
   compiledVersion: 2
   behaviourSyncMode: 1

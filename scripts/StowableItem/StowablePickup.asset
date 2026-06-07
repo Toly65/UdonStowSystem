@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: StowablePickup
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: ae7ef4143e247f84ea591c071d9e198e,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 91f53b7a38b82d848bc190fc28c3e16c,
     type: 2}
   udonAssembly: 
   assemblyError: 
-  sourceCsScript: {fileID: 11500000, guid: 67e373c3aa3dc2245a6da37bba9f2404, type: 3}
+  sourceCsScript: {fileID: 11500000, guid: 339d6e660b171044588fb9b47fe25610, type: 3}
   scriptVersion: 2
   compiledVersion: 2
   behaviourSyncMode: 1

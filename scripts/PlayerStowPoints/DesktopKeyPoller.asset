@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: DesktopKeyPoller
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: e9bd456162654f34981aa4111a31b2d4,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 2a8cec66ddc319049b46b4c8e1acc4df,
     type: 2}
   udonAssembly: 
   assemblyError: 
-  sourceCsScript: {fileID: 11500000, guid: d9824b4a3c8a53e4f9efc3d3916b1646, type: 3}
+  sourceCsScript: {fileID: 11500000, guid: 4d0fb587862bec843b469f241e6fa688, type: 3}
   scriptVersion: 2
   compiledVersion: 2
   behaviourSyncMode: 1
