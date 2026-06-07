@@ -14,15 +14,23 @@ public class playerTrackingParenting : UdonSharpBehaviour
 
     private void Start()
     {
-        localplayer = VRCPlayerApi.GetPlayerById(Networking.LocalPlayer.playerId);
+        localplayer = Networking.LocalPlayer;
     }
     public override void OnAvatarEyeHeightChanged(VRCPlayerApi player, float prevEyeHeightAsMeters)
     {
+        if(player != localplayer)
+        {
+            return;
+        }
         mainTransform.localScale = new Vector3(player.GetAvatarEyeHeightAsMeters(), player.GetAvatarEyeHeightAsMeters(), player.GetAvatarEyeHeightAsMeters());
     }
 
-    public void Update()
+    public void PostLateUpdate()
     {
+        if(!Utilities.IsValid(localplayer))
+        {
+            return;
+        }
         if(hipTransform)
         {
             hipTransform.SetPositionAndRotation(localplayer.GetBonePosition(HumanBodyBones.Hips), localplayer.GetBoneRotation(HumanBodyBones.Hips));
