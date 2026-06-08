@@ -32,7 +32,7 @@ jobs:
         with:
           type: "zip"
           directory: "."
-          filename: "../${{ env.zipFile }}"
+          filename: "${{ env.zipFile }}"
           exclusions: "*.git* .github/*"
 
       - run: find . -name \*.meta >> metaList
