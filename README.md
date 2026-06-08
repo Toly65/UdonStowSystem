@@ -4,6 +4,13 @@ Tired of holding things in your hand just to take them somewhere?
 
 This package adds an H3VR-style, on-person stow point system for VRChat worlds built with Udon/UdonSharp. Players can attach supported items to body-mounted stow points, keep their hands free, and quickly pull items back out when needed.
 
+## How to Install
+
+You can install this package in either of these ways:
+
+- Grab the latest release from GitHub: [Latest Release](https://github.com/Toly65/UdonStowSystem/releases/latest)
+- Add the VPM listing to Creator Companion: [Add Repo](vcc://vpm/addRepo?url=https://toly65.github.io/vpm-listing/index.json)
+
 ## Demo Videos
 
 [![VR Usage Demo](https://img.youtube.com/vi/ptbnpP2fJO8/maxresdefault.jpg)](https://youtu.be/ptbnpP2fJO8)
