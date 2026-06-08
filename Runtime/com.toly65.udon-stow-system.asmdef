@@ -1,0 +1,16 @@
+{
+  "name": "com.toly65.udon-stow-system",
+  "references": [
+    "UdonSharp.Runtime",
+    "VRC.SDK3",
+    "VRC.SDKBase"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "autoReferenced": true,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "defineConstraints": [],
+  "optionalUnityReferences": []
+}
