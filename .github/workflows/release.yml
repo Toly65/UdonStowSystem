@@ -37,6 +37,9 @@ jobs:
 
       - run: find . -name \*.meta >> metaList
 
+      - name: Create tmp directory
+        run: mkdir -p /tmp/tmp
+
       - name: Create UnityPackage
         uses: pCYSl5EDgo/create-unitypackage@e28c7a4616b2754c564b0a959a03b3c89b756fdb
         with:
