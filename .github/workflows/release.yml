@@ -37,6 +37,10 @@ jobs:
 
       - run: find . -name \*.meta >> metaList
 
+      # The create-unitypackage action calls rmdirSync('/tmp/tmp') unconditionally
+      # at startup. In Node.js 20+, rmdirSync throws ENOENT when the path does not
+      # exist. Pre-creating the directory allows the action to remove and recreate
+      # it cleanly.
       - name: Create tmp directory
         run: mkdir -p /tmp/tmp
 
