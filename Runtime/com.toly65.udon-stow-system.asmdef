@@ -3,7 +3,8 @@
   "references": [
     "UdonSharp.Runtime",
     "VRC.SDK3",
-    "VRC.SDKBase"
+    "VRC.SDKBase",
+    "VRC.Udon"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],

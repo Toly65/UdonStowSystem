@@ -1,13 +1,16 @@
 {
   "name": "com.toly65.udon-stow-system.Editor",
   "references": [
+    "UdonSharp.Editor",
     "VRC.SDK3",
     "VRC.SDK3.Editor",
     "VRC.SDKBase",
     "VRC.SDKBase.Editor",
     "com.toly65.udon-stow-system"
   ],
-  "includePlatforms": [],
+  "includePlatforms": [
+    "Editor"
+  ],
   "excludePlatforms": [],
   "allowUnsafeCode": false,
   "autoReferenced": true,

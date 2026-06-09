@@ -1,7 +1,7 @@
 {
   "name": "com.toly65.udon-stow-system",
   "displayName": "Udon Stow System",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Describe this Package",
   "gitDependencies": {},
   "vpmDependencies": {
