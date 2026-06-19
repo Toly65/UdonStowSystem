@@ -62,7 +62,7 @@ MonoBehaviour:
       Data: 3|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: StowSize, Assembly-CSharp
+      Data: StowSize, com.toly65.udon-stow-system
     - Name: 
       Entry: 8
       Data: 
@@ -197,7 +197,7 @@ MonoBehaviour:
       Data: 13|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: StowablePickup, Assembly-CSharp
+      Data: StowablePickup, com.toly65.udon-stow-system
     - Name: 
       Entry: 8
       Data: 

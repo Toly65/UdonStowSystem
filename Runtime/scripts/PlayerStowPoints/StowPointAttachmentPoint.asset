@@ -62,7 +62,7 @@ MonoBehaviour:
       Data: 3|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: StowPoint, Assembly-CSharp
+      Data: StowPoint, com.toly65.udon-stow-system
     - Name: 
       Entry: 8
       Data: 
