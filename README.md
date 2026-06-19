@@ -6,9 +6,6 @@ This package adds an H3VR-style, on-person stow point system for VRChat worlds b
 
 ## How to Install
 
-You can install this package in either of these ways:
-
-- Grab the latest release from GitHub: [Latest Release](https://github.com/Toly65/UdonStowSystem/releases/latest)
 - Add the VPM listing to Creator Companion: [Add Repo](https://toly65.github.io/vpm/add-repo.html)
 
 ## Demo Videos
