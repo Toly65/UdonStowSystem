@@ -3,6 +3,7 @@
   "displayName": "Udon Stow System",
   "version": "1.0.2",
   "description": "Describe this Package",
+  "unity": "2022.3",
   "gitDependencies": {},
   "vpmDependencies": {
     "com.vrchat.worlds": "3.10.3"
