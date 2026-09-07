@@ -27,6 +27,11 @@ public class StowableManager : UdonSharpBehaviour
     [SerializeField] private string onStowedEventName = "OnManagedStowed";
     [SerializeField] private string onUnstowedEventName = "OnManagedUnstowed";
 
+    // External owner (e.g. ActiveItem) decides whether the pickup exists at all.
+    // When false, the pickup is forced off regardless of stow/owner state.
+    // When true, stow state controls its active state.
+    private bool pickupEnabled = true;
+
     [UdonSynced, FieldChangeCallback(nameof(IsStowedSynced))]
     private bool _isStowedSynced;
 
@@ -81,6 +86,14 @@ public class StowableManager : UdonSharpBehaviour
         RelayEvent(onDropEventName);
     }
 
+    // Called by the item's owning script (e.g. ActiveItem) to declare whether the
+    // pickup should exist at all. When disabled, stow/owner logic can't re-enable it.
+    public void SetPickupEnabled(bool enabled)
+    {
+        pickupEnabled = enabled;
+        ApplyPickupVisibility();
+    }
+
     public void MarkStowed()
     {
         SetStowedState(true);
@@ -114,6 +127,16 @@ public class StowableManager : UdonSharpBehaviour
     {
         if (pickupVisualRoot == null)
         {
+            return;
+        }
+
+        // Owner script says this pickup shouldn't exist right now — force off, ignore stow/owner state.
+        if (!pickupEnabled)
+        {
+            if (pickupVisualRoot.activeSelf)
+            {
+                pickupVisualRoot.SetActive(false);
+            }
             return;
         }
 
