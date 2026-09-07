@@ -8,12 +8,29 @@ using VRC.Udon;
 public class StowablePickup : UdonSharpBehaviour
 {
     [SerializeField] private StowableManager manager;
+    private VRC_Pickup pickup;
 
     private void Start()
     {
         if (manager == null)
         {
             manager = GetComponentInParent<StowableManager>();
+        }
+
+        pickup = (VRC_Pickup)GetComponent(typeof(VRC_Pickup));
+    }
+
+    // Called by the manager so remote players can't grab a stowed item.
+    public void SetPickupable(bool value)
+    {
+        if (pickup == null)
+        {
+            pickup = (VRC_Pickup)GetComponent(typeof(VRC_Pickup));
+        }
+
+        if (pickup != null && pickup.pickupable != value)
+        {
+            pickup.pickupable = value;
         }
     }
 

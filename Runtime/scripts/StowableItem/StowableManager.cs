@@ -94,6 +94,21 @@ public class StowableManager : UdonSharpBehaviour
         ApplyPickupVisibility();
     }
 
+    // Called from an owner script's Awake, before this Start runs, so the pickup
+    // never flashes visible before the owner decides its state.
+    public void SetExternallyControlled()
+    {
+        pickupEnabled = false;
+        ApplyPickupVisibility();
+    }
+
+    // Clears stale stowed state on respawn. No RequestSerialization - the caller
+    // bundles this into its own sync.
+    public void ResetStowedState()
+    {
+        IsStowedSynced = false;
+    }
+
     public void MarkStowed()
     {
         SetStowedState(true);
@@ -125,15 +140,11 @@ public class StowableManager : UdonSharpBehaviour
 
     private void ApplyPickupVisibility()
     {
-        if (pickupVisualRoot == null)
-        {
-            return;
-        }
-
         // Owner script says this pickup shouldn't exist right now — force off, ignore stow/owner state.
         if (!pickupEnabled)
         {
-            if (pickupVisualRoot.activeSelf)
+            SetPickupable(false);
+            if (pickupVisualRoot != null && pickupVisualRoot.activeSelf)
             {
                 pickupVisualRoot.SetActive(false);
             }
@@ -141,17 +152,22 @@ public class StowableManager : UdonSharpBehaviour
         }
 
         VRCPlayerApi localPlayer = Networking.LocalPlayer;
-        if (localPlayer == null)
-        {
-            pickupVisualRoot.SetActive(true);
-            return;
-        }
+        // Only the owner may grab a stowed item; remote players can't steal it.
+        bool ownedLocally = localPlayer == null || Networking.IsOwner(gameObject);
+        bool shouldBeVisible = !IsStowedSynced || ownedLocally;
+        SetPickupable(shouldBeVisible);
 
-        // Keep visuals for owner, hide for non-owners when stowed.
-        bool shouldBeVisible = !IsStowedSynced || Networking.IsOwner(gameObject);
-        if (pickupVisualRoot.activeSelf != shouldBeVisible)
+        if (pickupVisualRoot != null && pickupVisualRoot.activeSelf != shouldBeVisible)
         {
             pickupVisualRoot.SetActive(shouldBeVisible);
+        }
+    }
+
+    private void SetPickupable(bool value)
+    {
+        if (stowablePickup != null)
+        {
+            stowablePickup.SetPickupable(value);
         }
     }
 
