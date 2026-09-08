@@ -10,20 +10,6 @@ items back out when they need them. It works in VR and on desktop, syncs across
 players, and can serve as the foundation for a diegetic, menu-free inventory
 system.
 
-## Looking for VRChat pockets?
-
-This is that. A few phrasings people search for, and what the system does about
-each:
-
-| You want | This gives you |
-|---|---|
-| **VRChat pockets** — somewhere to put a prop without dropping it | Trigger volumes on the player's hips and chest that hold any `VRC_Pickup` |
-| **VRChat holsters / gun holster** | Size-classed stow points, so a pistol fits the hip and a rifle needs the back |
-| **VRChat inventory system** without a UI menu | Stow points used as diegetic slots — no canvas, no menu, just reach and grab |
-| **VRChat backpack / belt / pouch** | Points can be parented anywhere on the tracked hip or chest bones |
-| **Desktop-friendly** item storage | Number keys bring a stow point in front of the camera; no VR required |
-| Items that **stay yours** | Stowed items are hidden and non-grabbable for other players, so nobody can pick your pocket |
-
 ## How to Install
 
 - Add the VPM listing to Creator Companion: [Add Repo](https://toly65.github.io/vpm/add-repo.html)
