@@ -1,8 +1,28 @@
-# Toly's Udon Stow System
+# Toly's Udon Stow System — VRChat Pockets, Holsters and Body Storage
 
-Tired of holding things in your hand just to take them somewhere?
+**Give players working pockets in your VRChat world.** Tired of holding things
+in your hand just to take them somewhere?
 
-This package adds an H3VR-style, on-person stow point system for VRChat worlds built with Udon/UdonSharp. Players can attach supported items to body-mounted stow points (acting as virtual pockets, pouches, or holsters), keep their hands free, and quickly pull items back out when needed. It can also serve as a foundation for a simple, diegetic inventory system.
+The Udon Stow System adds H3VR-style, on-person storage to VRChat worlds built
+with Udon/UdonSharp. Players stow pickups into body-mounted stow points — hip
+pockets, belt pouches, holsters, back slots — keep their hands free, and pull
+items back out when they need them. It works in VR and on desktop, syncs across
+players, and can serve as the foundation for a diegetic, menu-free inventory
+system.
+
+## Looking for VRChat pockets?
+
+This is that. A few phrasings people search for, and what the system does about
+each:
+
+| You want | This gives you |
+|---|---|
+| **VRChat pockets** — somewhere to put a prop without dropping it | Trigger volumes on the player's hips and chest that hold any `VRC_Pickup` |
+| **VRChat holsters / gun holster** | Size-classed stow points, so a pistol fits the hip and a rifle needs the back |
+| **VRChat inventory system** without a UI menu | Stow points used as diegetic slots — no canvas, no menu, just reach and grab |
+| **VRChat backpack / belt / pouch** | Points can be parented anywhere on the tracked hip or chest bones |
+| **Desktop-friendly** item storage | Number keys bring a stow point in front of the camera; no VR required |
+| Items that **stay yours** | Stowed items are hidden and non-grabbable for other players, so nobody can pick your pocket |
 
 ## How to Install
 
@@ -18,7 +38,7 @@ This package adds an H3VR-style, on-person stow point system for VRChat worlds b
 
 The Udon Stow System lets players:
 
-- Stow compatible items onto attachment points on their character — think hip holsters, back slots, belt pouches, or virtual pockets.
+- Stow compatible items onto attachment points on their character — think hip holsters, back slots, belt pouches, or virtual pockets in VRChat.
 - Free up their hands while moving around, climbing, interacting, or swapping tools.
 - Retrieve stowed items quickly instead of hunting for where they were dropped.
 - Organize loadout-style gameplay with intentional item placement.
@@ -46,6 +66,17 @@ The Udon Stow System lets players:
 
 Keeping an item physically in hand the whole time can be awkward and limiting.
 With stow points, players can move naturally, interact with the world, and still keep important items on their person for fast access — just like using real pockets, a belt, or a backpack.
+
+## Documentation
+
+Full setup guide and script reference on the
+[wiki](https://github.com/Toly65/Udon-Stow-System/wiki):
+
+- [Setup](https://github.com/Toly65/Udon-Stow-System/wiki/Setup) — prefabs, adding stow points, making an item stowable.
+- [Script Reference](https://github.com/Toly65/Udon-Stow-System/wiki/Script-Reference) — state model, and what a pool or spawner must call.
+
+Pairs with the [Udon Combat System](https://github.com/Toly65/UdonCombatSystem)
+for holstering guns.
 
 ## Notes
 

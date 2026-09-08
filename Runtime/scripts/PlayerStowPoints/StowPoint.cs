@@ -171,6 +171,12 @@ public class StowPoint : UdonSharpBehaviour
     }
     public void ForceReleaseItemLock()
     {
+        StowableManager releasedManager = null;
+        if (TryGetStowableManager(recievabePickup, ref releasedManager))
+        {
+            releasedManager.RegisterStowPoint(null);
+        }
+
         RestoreHiddenDesktopPickup();
         RestoreTrackedPickupPhysicsState();
         recievabePickup = null;
@@ -185,6 +191,34 @@ public class StowPoint : UdonSharpBehaviour
 
         UpdateAttachmentPointActiveState();
     }
+    // Backstop for despawn systems that don't call StowableManager.ForceUnstowEverywhere.
+    // Without it the attachment loop keeps dragging a dead pickup back to the stow point,
+    // so it snaps back here instead of the spawn point when it respawns.
+    public bool ReleaseIfPickupDespawned()
+    {
+        if (recievabePickup == null || recievabePickup == hiddenDesktopPickup)
+        {
+            return false;
+        }
+
+        if (recievabePickup.gameObject.activeInHierarchy)
+        {
+            return false;
+        }
+
+        // An inactive object is not proof of a despawn - StowableManager hides the
+        // visuals for stow/ownership reasons too, and releasing then would drop a
+        // still-stowed item. Only the owning system's pickupEnabled flag is decisive.
+        StowableManager stowableManager = null;
+        if (TryGetStowableManager(recievabePickup, ref stowableManager) && stowableManager.IsItemSpawned())
+        {
+            return false;
+        }
+
+        ForceReleaseItemLock();
+        return true;
+    }
+
     private void lockItem(VRC_Pickup pickup)
     {
         CacheAndApplyLockedPhysicsState(pickup);
@@ -204,6 +238,7 @@ public class StowPoint : UdonSharpBehaviour
         TryGetStowableManager(pickup, ref stowableManager);
         if (stowableManager != null)
         {
+            stowableManager.RegisterStowPoint(this);
             stowableManager.MarkStowed();
         }
     }
@@ -268,6 +303,7 @@ public class StowPoint : UdonSharpBehaviour
         TryGetStowableManager(pickup, ref stowableManager);
         if (stowableManager != null)
         {
+            stowableManager.RegisterStowPoint(null);
             stowableManager.MarkUnstowed();
         }
 

@@ -27,10 +27,12 @@ public class StowableManager : UdonSharpBehaviour
     [SerializeField] private string onStowedEventName = "OnManagedStowed";
     [SerializeField] private string onUnstowedEventName = "OnManagedUnstowed";
 
-    // External owner (e.g. ActiveItem) decides whether the pickup exists at all.
-    // When false, the pickup is forced off regardless of stow/owner state.
-    // When true, stow state controls its active state.
-    private bool pickupEnabled = true;
+    // Does this item exist in the world right now? An owning system (pool, spawner,
+    // inventory) sets it; stow state can never override it. Distinct from the pickup's
+    // pickupable flag, which is about who is allowed to grab an item that does exist.
+    // Owning systems should call SetItemSpawned(false) from Awake so the pickup never
+    // flashes visible before Start decides its state.
+    private bool itemSpawned = true;
 
     [UdonSynced, FieldChangeCallback(nameof(IsStowedSynced))]
     private bool _isStowedSynced;
@@ -41,7 +43,7 @@ public class StowableManager : UdonSharpBehaviour
         set
         {
             _isStowedSynced = value;
-            ApplyPickupVisibility();
+            ApplyPickupState();
         }
     }
 
@@ -57,17 +59,17 @@ public class StowableManager : UdonSharpBehaviour
             stowablePickup.SetManager(this);
         }
 
-        ApplyPickupVisibility();
+        ApplyPickupState();
     }
 
     public override void OnDeserialization()
     {
-        ApplyPickupVisibility();
+        ApplyPickupState();
     }
 
     public override void OnOwnershipTransferred(VRCPlayerApi player)
     {
-        ApplyPickupVisibility();
+        ApplyPickupState();
     }
 
     public int GetSizeClass()
@@ -86,20 +88,51 @@ public class StowableManager : UdonSharpBehaviour
         RelayEvent(onDropEventName);
     }
 
-    // Called by the item's owning script (e.g. ActiveItem) to declare whether the
-    // pickup should exist at all. When disabled, stow/owner logic can't re-enable it.
-    public void SetPickupEnabled(bool enabled)
+    public void SetItemSpawned(bool spawned)
     {
-        pickupEnabled = enabled;
-        ApplyPickupVisibility();
+        itemSpawned = spawned;
+        ApplyPickupState();
     }
 
-    // Called from an owner script's Awake, before this Start runs, so the pickup
-    // never flashes visible before the owner decides its state.
-    public void SetExternallyControlled()
+    // False means an owning system has despawned/pooled this item. Hiding the visuals
+    // for stow or ownership reasons does NOT clear this - stow points rely on the
+    // difference to tell "despawned" from "merely hidden".
+    public bool IsItemSpawned()
     {
-        pickupEnabled = false;
-        ApplyPickupVisibility();
+        return itemSpawned;
+    }
+
+    // The stow point that has this item locked on THIS client. Stow points are
+    // local-only, so every client tracks its own.
+    private StowPoint localStowPoint;
+
+    public void RegisterStowPoint(StowPoint point)
+    {
+        localStowPoint = point;
+    }
+
+    // Call this from any despawn/return/pool system before reclaiming the item, so
+    // every client's stow point lets go instead of dragging it back next frame.
+    public void ForceUnstowEverywhere()
+    {
+        SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, nameof(ForceUnstowLocal));
+    }
+
+    // Local release only - no ownership grab, so a mass despawn doesn't make every
+    // client fight over the object.
+    public void ForceUnstowLocal()
+    {
+        if (localStowPoint != null)
+        {
+            StowPoint point = localStowPoint;
+            localStowPoint = null;
+            point.ForceReleaseItemLock();
+        }
+
+        if (Networking.IsOwner(gameObject))
+        {
+            SetStowedState(false);
+        }
     }
 
     // Clears stale stowed state on respawn. No RequestSerialization - the caller
@@ -138,10 +171,10 @@ public class StowableManager : UdonSharpBehaviour
         RelayEvent(isStowed ? onStowedEventName : onUnstowedEventName);
     }
 
-    private void ApplyPickupVisibility()
+    private void ApplyPickupState()
     {
-        // Owner script says this pickup shouldn't exist right now — force off, ignore stow/owner state.
-        if (!pickupEnabled)
+        // Despawned - force everything off, ignore stow/owner state.
+        if (!itemSpawned)
         {
             SetPickupable(false);
             if (pickupVisualRoot != null && pickupVisualRoot.activeSelf)

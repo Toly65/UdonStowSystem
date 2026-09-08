@@ -28,6 +28,11 @@ public class StowPointAttachmentPoint : UdonSharpBehaviour
             return;
         }
 
+        if (stowPoint != null && stowPoint.ReleaseIfPickupDespawned())
+        {
+            return;
+        }
+
         if (!itemLocked)
         {
             if (receptive && !trackedPickup.IsHeld)
