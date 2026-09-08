@@ -3,12 +3,7 @@
 **Give players working pockets in your VRChat world.** Tired of holding things
 in your hand just to take them somewhere?
 
-The Udon Stow System adds H3VR-style, on-person storage to VRChat worlds built
-with Udon/UdonSharp. Players stow pickups into body-mounted stow points — hip
-pockets, belt pouches, holsters, back slots — keep their hands free, and pull
-items back out when they need them. It works in VR and on desktop, syncs across
-players, and can serve as the foundation for a diegetic, menu-free inventory
-system.
+The Udon Stow System adds H3VR-style, on-person storage to VRChat worlds built with Udon/UdonSharp. Players stow pickups into body-mounted stow points, including hip pockets, belt pouches, holsters, and back slots, to keep their hands free, then pull items back out when they need them. It works in VR and on desktop, syncs across players, and can serve as the foundation for a diegetic, menu-free inventory system.
 
 ## How to Install
 
