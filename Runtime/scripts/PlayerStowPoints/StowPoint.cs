@@ -251,6 +251,20 @@ public class StowPoint : UdonSharpBehaviour
         return itemlocked;
     }
 
+    // The pickup stowed here, or null when empty. Still valid while a desktop stow has the pickup object hidden.
+    public VRC_Pickup GetStowedPickup()
+    {
+        return itemlocked ? recievabePickup : null;
+    }
+
+    // The StowableManager of the stowed item, or null when empty or the item isn't stowable-managed.
+    public StowableManager GetStowedManager()
+    {
+        StowableManager manager = null;
+        TryGetStowableManager(GetStowedPickup(), ref manager);
+        return manager;
+    }
+
     public void SetDesktopHiddenPickupVisible(bool isVisible)
     {
         if (hiddenDesktopPickup == null)

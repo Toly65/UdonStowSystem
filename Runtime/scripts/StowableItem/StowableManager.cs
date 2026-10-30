@@ -20,6 +20,11 @@ public class StowableManager : UdonSharpBehaviour
     [SerializeField] private GameObject pickupVisualRoot;
     [SerializeField] private StowablePickup stowablePickup;
 
+    [Header("Display")]
+    [Tooltip("Shown by HUDs that list stowed items. Left empty, an owning pool or spawner can fill it in with SetStowDisplay.")]
+    [SerializeField] private Sprite stowIcon;
+    [SerializeField] private string stowName;
+
     [Header("Relayed Events")]
     [SerializeField] private UdonSharpBehaviour[] eventTargets;
     [SerializeField] private string onPickupEventName = "OnManagedPickup";
@@ -77,6 +82,30 @@ public class StowableManager : UdonSharpBehaviour
         return (int)stowSize;
     }
 
+    public Sprite GetStowIcon()
+    {
+        return stowIcon;
+    }
+
+    public string GetStowName()
+    {
+        return stowName;
+    }
+
+    // For owning systems (pools, spawners). Only fills what this item hasn't set itself, so a per-item icon wins.
+    public void SetStowDisplay(string displayName, Sprite icon)
+    {
+        if (stowIcon == null)
+        {
+            stowIcon = icon;
+        }
+
+        if (string.IsNullOrEmpty(stowName))
+        {
+            stowName = displayName;
+        }
+    }
+
     public void OnPickupRelayed()
     {
         SetStowedState(false);
@@ -86,6 +115,18 @@ public class StowableManager : UdonSharpBehaviour
     public void OnDropRelayed()
     {
         RelayEvent(onDropEventName);
+    }
+
+    // Deprecated aliases kept so older integrations (e.g. VRCRP ActiveItem) still compile.
+    // Prefer SetItemSpawned.
+    public void SetPickupEnabled(bool enabled)
+    {
+        SetItemSpawned(enabled);
+    }
+
+    public void SetExternallyControlled()
+    {
+        SetItemSpawned(false);
     }
 
     public void SetItemSpawned(bool spawned)
